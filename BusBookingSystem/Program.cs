@@ -1,3 +1,8 @@
+using Data.Identity;
+using Infrastracture.ConfiqDpendancies;
+using Infrastracture.SeedData;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +12,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//add configuration dependancies and register services
+builder.Services.AddInfrastructureRegister(builder.Configuration);
+
 var app = builder.Build();
+// Seed roles and users
+using (var scope= app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var roleManager = services.GetRequiredService<RoleManager<Role>>();
+    var userManager = services.GetRequiredService<UserManager<User>>();
+    await RoleSeeder.SeedRoles(roleManager);
+    await UserSeeder.SeedUsers(userManager);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -17,7 +34,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
