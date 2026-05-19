@@ -205,11 +205,12 @@ namespace Infrastracture.Migrations
 
                     b.Property<string>("LicenceNumber")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("NationalId")
-                        .HasColumnType("int");
+                    b.Property<string>("NationalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -234,7 +235,7 @@ namespace Infrastracture.Migrations
 
                     b.ToTable("Drivers", t =>
                         {
-                            t.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like ' DR-[0-9][0-9][0-9][0-9]'");
+                            t.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like 'DR-[0-9][0-9][0-9][0-9]'");
                         });
                 });
 
@@ -272,11 +273,12 @@ namespace Infrastracture.Migrations
 
                     b.Property<string>("LicenceNumber")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("NationalId")
-                        .HasColumnType("int");
+                    b.Property<string>("NationalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -300,7 +302,7 @@ namespace Infrastracture.Migrations
 
                     b.ToTable("DriverApplications", t =>
                         {
-                            t.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like ' DR-[0-9][0-9][0-9][0-9]'")
+                            t.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like 'DR-[0-9][0-9][0-9][0-9]'")
                                 .HasName("CK_Driver_LicenceNumber1");
                         });
                 });
@@ -713,7 +715,6 @@ namespace Infrastracture.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 

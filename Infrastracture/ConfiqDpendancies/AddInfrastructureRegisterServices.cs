@@ -89,6 +89,10 @@ namespace Infrastracture.ConfiqDpendancies
             config.Bind("JWT", Jwt);
             services.AddSingleton(Jwt);
 
+            //mail Bind 
+            var mail = new MailSetting();
+            config.Bind("MailSetting", mail);
+            services.AddSingleton(mail);
 
             services.AddAuthentication(options =>
             {
