@@ -19,7 +19,7 @@ namespace Infrastracture.ConfiqurationDependancies
             b.Property(c => c.Email).IsRequired();
             b.Property(c => c.FullName).IsRequired();
             b.Property(c => c.UserId).IsRequired();
-            b.Property(c => c.LicenceNumber).IsRequired().HasMaxLength(5);
+            b.Property(c => c.LicenceNumber).IsRequired().HasMaxLength(10);
             b.Property(c => c.LicenceImageUrl).IsRequired();
             b.Property(c => c.LicenceExprireYear).IsRequired();
             b.HasIndex(c => c.LicenceNumber).IsUnique();
@@ -36,7 +36,7 @@ namespace Infrastracture.ConfiqurationDependancies
 
             b.ToTable(c =>
             {
-                c.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like ' DR-[0-9][0-9][0-9][0-9]'");
+                c.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like 'DR-[0-9][0-9][0-9][0-9]'");
             });
                 
         }

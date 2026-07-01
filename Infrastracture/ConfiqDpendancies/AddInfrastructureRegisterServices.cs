@@ -89,7 +89,16 @@ namespace Infrastracture.ConfiqDpendancies
             config.Bind("JWT", Jwt);
             services.AddSingleton(Jwt);
 
-
+            //mail Bind 
+            var mail = new MailSetting();
+            config.Bind("MailSetting", mail);
+            services.AddSingleton(mail);
+            
+            //confiqure paymob
+            var pay = new PayMob();
+            config.Bind("PayMob", pay);
+            services.AddSingleton(pay);
+            
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

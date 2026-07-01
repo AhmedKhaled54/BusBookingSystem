@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data.Entity
 {
-    public class Trip
+    public class Trip:BaseEntity
     {
         public int Id { get; set; }
         public DateTime DepartualTime { get; set; }
@@ -17,7 +17,7 @@ namespace Data.Entity
         public decimal Price { get; set; }
         //status 
         public TripeStatus Status { get; set; } = TripeStatus.Schadule;
-         
+
         public int DriverId { get; set; }
         public int BusId { get; set; }
         public int RouteId { get; set; }
@@ -30,6 +30,8 @@ namespace Data.Entity
         public Bus Bus { get; set; }
         public Routes Routes { get; set; }
         public ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
-        public ICollection<BusLocation> BusLocations { get; set; } 
+        public ICollection<BusLocation> BusLocations { get; set; }
+        public ICollection<Booking> Bookings { get; set; }//
+
     }
 }

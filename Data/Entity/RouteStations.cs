@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data.Entity
 {
-    public  class RouteStations
+    public class RouteStations:BaseEntity
     {
         public int Id { get; set; }
         public int RouteId { get; set; }
@@ -14,6 +14,7 @@ namespace Data.Entity
         public int Order { get; set; }
         public TimeSpan ArrivalOffset { get; set; }
         //
+
         public Routes Route { get; set; }
         public Stations Station { get; set; }
 

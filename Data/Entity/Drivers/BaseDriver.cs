@@ -21,7 +21,7 @@ namespace Data.Entity.Drivers
         public string  LicenceNumber { get; set; }
         public DateOnly LicenceExprireYear { get; set; }
         public string LicenceImageUrl { get; set; }
-        public int NationalId { get; set; }
+        public string NationalId { get; set; }
 
         public int UserId { get; set; }
         public User User { get; set; }

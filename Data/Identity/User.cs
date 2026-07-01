@@ -18,7 +18,6 @@ namespace Data.Identity
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string FullName => $"{FirstName} {LastName}";
-        public string Email { get; private set; }
         public string NationalId { get;private  set; }
         public DateTime CreatedAt { get; set; }=DateTime.Now;
         public DateOnly BirthDate { get; private  set; }
@@ -31,8 +30,7 @@ namespace Data.Identity
         public ICollection<DriverApplication> DriverApplications { get; set; } = new List<DriverApplication>();
         public ICollection<Booking> Bookings { get; set; }=new List<Booking>();
 
-
-
+      
 
 
         public void SetName (string F_name ,string L_name)
@@ -65,17 +63,6 @@ namespace Data.Identity
             this.NationalId = NationalId;
         }
 
-        public void SetEmail(string email)
-        {
-            if (string.IsNullOrEmpty(email))
-                throw new ArgumentException("Email Is Required !");
-            if (!email.Contains("@"))
-                throw new ArgumentException("Invalid Email !");
-
-            if (!new EmailAddressAttribute().IsValid(email))
-                throw new ArgumentException("Invalid Email Format !");
-            
-            Email = email;
-        }
+        
     }
 }

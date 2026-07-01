@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data.Entity
 {
-    public  class Routes
+    public  class Routes:BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,7 +17,6 @@ namespace Data.Entity
         //navegation 
         public Stations StartStation { get; set; }
         public Stations EndStation { get; set; }
-
         public ICollection <Trip> Trips { get; set; }
         public ICollection <RouteStations > RouteStations { get; set; } = new List<RouteStations> ();
     }

@@ -1,0 +1,136 @@
+[
+  {
+    "Name": "Cairo Central Station",
+    "City": "Cairo",
+    "Latitude": 30.0444,
+    "Longitude": 31.2357
+  },
+  {
+    "Name": "Giza Station",
+    "City": "Giza",
+    "Latitude": 30.0131,
+    "Longitude": 31.2089
+  },
+  {
+    "Name": "6th of October Station",
+    "City": "6th of October",
+    "Latitude": 29.9380,
+    "Longitude": 30.9188
+  },
+
+  {
+    "Name": "Alexandria Main Station",
+    "City": "Alexandria",
+    "Latitude": 31.2001,
+    "Longitude": 29.9187
+  },
+  {
+    "Name": "Borg El Arab Station",
+    "City": "Alexandria",
+    "Latitude": 30.8580,
+    "Longitude": 29.6937
+  },
+
+  {
+    "Name": "Tanta Station",
+    "City": "Tanta",
+    "Latitude": 30.7865,
+    "Longitude": 31.0004
+  },
+  {
+    "Name": "Mansoura Station",
+    "City": "Mansoura",
+    "Latitude": 31.0409,
+    "Longitude": 31.3785
+  },
+  {
+    "Name": "Zagazig Station",
+    "City": "Zagazig",
+    "Latitude": 30.5877,
+    "Longitude": 31.5020
+  },
+
+  {
+    "Name": "Ismailia Central Station",
+    "City": "Ismailia",
+    "Latitude": 30.5965,
+    "Longitude": 32.2715
+  },
+  {
+    "Name": "Suez Station",
+    "City": "Suez",
+    "Latitude": 29.9668,
+    "Longitude": 32.5498
+  },
+  {
+    "Name": "Port Said Station",
+    "City": "Port Said",
+    "Latitude": 31.2653,
+    "Longitude": 32.3019
+  },
+
+  {
+    "Name": "Damietta Station",
+    "City": "Damietta",
+    "Latitude": 31.4165,
+    "Longitude": 31.8133
+  },
+  {
+    "Name": "Kafr El Sheikh Station",
+    "City": "Kafr El Sheikh",
+    "Latitude": 31.1107,
+    "Longitude": 30.9388
+  },
+
+  {
+    "Name": "Fayoum Station",
+    "City": "Fayoum",
+    "Latitude": 29.3084,
+    "Longitude": 30.8428
+  },
+  {
+    "Name": "Beni Suef Station",
+    "City": "Beni Suef",
+    "Latitude": 29.0661,
+    "Longitude": 31.0994
+  },
+
+  {
+    "Name": "Minya Station",
+    "City": "Minya",
+    "Latitude": 28.1099,
+    "Longitude": 30.7503
+  },
+  {
+    "Name": "Assiut Station",
+    "City": "Assiut",
+    "Latitude": 27.1809,
+    "Longitude": 31.1837
+  },
+
+  {
+    "Name": "Sohag Station",
+    "City": "Sohag",
+    "Latitude": 26.5569,
+    "Longitude": 31.6956
+  },
+  {
+    "Name": "Qena Station",
+    "City": "Qena",
+    "Latitude": 26.1551,
+    "Longitude": 32.7160
+  },
+  {
+    "Name": "Luxor Station",
+    "City": "Luxor",
+    "Latitude": 25.6872,
+    "Longitude": 32.6396
+  },
+
+  {
+    "Name": "Aswan Station",
+    "City": "Aswan",
+    "Latitude": 24.0889,
+    "Longitude": 32.8998
+  }
+]

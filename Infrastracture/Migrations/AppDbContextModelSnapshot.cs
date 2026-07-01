@@ -69,9 +69,6 @@ namespace Infrastracture.Migrations
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BookingId1")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
@@ -79,19 +76,12 @@ namespace Infrastracture.Migrations
                     b.Property<int>("SeatsId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SeatsId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookingId1");
-
                     b.HasIndex("SeatsId");
-
-                    b.HasIndex("SeatsId1");
 
                     b.HasIndex("BookingId", "SeatsId");
 
@@ -109,6 +99,12 @@ namespace Infrastracture.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
                     b.Property<int>("DriverId")
                         .HasColumnType("int");
 
@@ -116,10 +112,13 @@ namespace Infrastracture.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
@@ -205,11 +204,12 @@ namespace Infrastracture.Migrations
 
                     b.Property<string>("LicenceNumber")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("NationalId")
-                        .HasColumnType("int");
+                    b.Property<string>("NationalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -234,7 +234,7 @@ namespace Infrastracture.Migrations
 
                     b.ToTable("Drivers", t =>
                         {
-                            t.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like ' DR-[0-9][0-9][0-9][0-9]'");
+                            t.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like 'DR-[0-9][0-9][0-9][0-9]'");
                         });
                 });
 
@@ -272,11 +272,12 @@ namespace Infrastracture.Migrations
 
                     b.Property<string>("LicenceNumber")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("NationalId")
-                        .HasColumnType("int");
+                    b.Property<string>("NationalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -300,7 +301,7 @@ namespace Infrastracture.Migrations
 
                     b.ToTable("DriverApplications", t =>
                         {
-                            t.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like ' DR-[0-9][0-9][0-9][0-9]'")
+                            t.HasCheckConstraint("CK_Driver_LicenceNumber", "LicenceNumber Like 'DR-[0-9][0-9][0-9][0-9]'")
                                 .HasName("CK_Driver_LicenceNumber1");
                         });
                 });
@@ -351,23 +352,24 @@ namespace Infrastracture.Migrations
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Currency")
                         .IsRequired()
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
-                    b.Property<DateTime>("PayedAt")
+                    b.Property<DateTime?>("PayedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentMethos")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("TransactionId")
-                        .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
@@ -377,6 +379,53 @@ namespace Infrastracture.Migrations
                         .IsUnique();
 
                     b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("Data.Entity.PaymobIntetion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClientSecret")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Expiration")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymobIntentionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymobOrderId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Request")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Response")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SpecailRefrence")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentId");
+
+                    b.ToTable("PaymobIntentions");
                 });
 
             modelBuilder.Entity("Data.Entity.Review", b =>
@@ -395,8 +444,17 @@ namespace Infrastracture.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
                     b.Property<int?>("DriverId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Rate")
                         .HasColumnType("int");
@@ -434,6 +492,15 @@ namespace Infrastracture.Migrations
                     b.Property<TimeSpan>("ArrivalOffset")
                         .HasColumnType("time");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
@@ -465,11 +532,20 @@ namespace Infrastracture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
                     b.Property<double>("DisTance")
                         .HasColumnType("float");
 
                     b.Property<int>("EndStationId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -498,6 +574,18 @@ namespace Infrastracture.Migrations
                     b.Property<int>("BusId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
@@ -521,6 +609,15 @@ namespace Infrastracture.Migrations
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Latitude")
                         .HasPrecision(10, 7)
@@ -556,8 +653,9 @@ namespace Infrastracture.Migrations
                     b.Property<DateTime>("IssuedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("QRCode")
                         .IsRequired()
@@ -592,7 +690,10 @@ namespace Infrastracture.Migrations
                     b.Property<int>("BusId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BusId1")
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DepartualTime")
@@ -601,13 +702,13 @@ namespace Infrastracture.Migrations
                     b.Property<int>("DriverId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("RouteId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RoutesId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -617,15 +718,11 @@ namespace Infrastracture.Migrations
 
                     b.HasIndex("BusId");
 
-                    b.HasIndex("BusId1");
-
                     b.HasIndex("DepartualTime");
 
                     b.HasIndex("DriverId");
 
                     b.HasIndex("RouteId");
-
-                    b.HasIndex("RoutesId");
 
                     b.ToTable("Trips");
                 });
@@ -713,7 +810,6 @@ namespace Infrastracture.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -887,7 +983,7 @@ namespace Infrastracture.Migrations
             modelBuilder.Entity("Data.Entity.Booking", b =>
                 {
                     b.HasOne("Data.Entity.Trip", "Trip")
-                        .WithMany()
+                        .WithMany("Bookings")
                         .HasForeignKey("TripId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -906,24 +1002,16 @@ namespace Infrastracture.Migrations
             modelBuilder.Entity("Data.Entity.BookingSeats", b =>
                 {
                     b.HasOne("Data.Entity.Booking", "Booking")
-                        .WithMany()
+                        .WithMany("BookingSeats")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Data.Entity.Booking", null)
-                        .WithMany("BookingSeats")
-                        .HasForeignKey("BookingId1");
-
                     b.HasOne("Data.Entity.Seats", "Seats")
-                        .WithMany()
+                        .WithMany("BookingSeats")
                         .HasForeignKey("SeatsId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.HasOne("Data.Entity.Seats", null)
-                        .WithMany("BookingSeats")
-                        .HasForeignKey("SeatsId1");
 
                     b.Navigation("Booking");
 
@@ -1002,6 +1090,17 @@ namespace Infrastracture.Migrations
                         .IsRequired();
 
                     b.Navigation("Booking");
+                });
+
+            modelBuilder.Entity("Data.Entity.PaymobIntetion", b =>
+                {
+                    b.HasOne("Data.Entity.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("Data.Entity.Review", b =>
@@ -1094,14 +1193,10 @@ namespace Infrastracture.Migrations
             modelBuilder.Entity("Data.Entity.Trip", b =>
                 {
                     b.HasOne("Data.Entity.Bus", "Bus")
-                        .WithMany()
+                        .WithMany("Trips")
                         .HasForeignKey("BusId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("Data.Entity.Bus", null)
-                        .WithMany("Trips")
-                        .HasForeignKey("BusId1");
 
                     b.HasOne("Data.Entity.Drivers.Driver", "Driver")
                         .WithMany()
@@ -1110,14 +1205,10 @@ namespace Infrastracture.Migrations
                         .IsRequired();
 
                     b.HasOne("Data.Entity.Routes", "Routes")
-                        .WithMany()
+                        .WithMany("Trips")
                         .HasForeignKey("RouteId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("Data.Entity.Routes", null)
-                        .WithMany("Trips")
-                        .HasForeignKey("RoutesId");
 
                     b.Navigation("Bus");
 
@@ -1231,6 +1322,8 @@ namespace Infrastracture.Migrations
 
             modelBuilder.Entity("Data.Entity.Trip", b =>
                 {
+                    b.Navigation("Bookings");
+
                     b.Navigation("BusLocations");
 
                     b.Navigation("Reviews");

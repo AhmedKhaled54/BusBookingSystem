@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Entity
 {
-    public class Review
+    public class Review:BaseEntity
     {
         public int Id { get; set; }
         public int Rate { get; private set; } = 1;
@@ -18,7 +18,6 @@ namespace Data.Entity
         public int UserId { get; set; }
         public int? TripId { get; set; }
         public int? DriverId { get; set; }// optional 
-
 
         public User User { get; set; }
         public Trip Trip { get; set; }
