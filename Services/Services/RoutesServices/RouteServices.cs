@@ -1,5 +1,8 @@
-﻿using Infrastracture.Abstract;
+﻿using Data.Entity;
+using Infrastracture.Abstract;
+using Infrastracture.Specifications.RouteSpecification;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +20,23 @@ namespace Services.Services.RoutesServices
             _UOW = uOW;
         }
 
-        public async Task CreateRoute(Route route)
-        =>await _UOW.Repository<Route>().AddAsync(route);
+        public async Task CreateRoute(Routes route)
+        => await _UOW.Repository<Routes>().AddAsync(route);
 
-        public async Task<IEnumerable<Route>> GetAllRoutes()
-            =>await _UOW.Repository<Route>().GetAllAsync();
+        public async Task<IEnumerable<Routes>> GetAllRoutes()
+        {
+            var specs = new RoutesSpecification();
+            var result = new RoutesWithStationSpecification(specs);
+            var data = await _UOW.Repository<Routes>().GetEntityWithSpecification(result).ToListAsync();
+            return data;
+        }
 
-        public async Task<Route> GetRouteById(int id)
-            =>await _UOW.Repository<Route>().GetByIdAsync(id);
+
+        public async Task<Routes> GetRouteById(int id)
+        {
+            var specs = new RoutesWithStationSpecification(id);
+            var data = await _UOW.Repository<Routes>().GetEntityByIdSepecification(specs);
+            return data;
+        }
     }
 }

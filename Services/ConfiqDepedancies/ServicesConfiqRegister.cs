@@ -15,6 +15,7 @@ using Services.Services.FileServices;
 using Services.Services.OtpService;
 using Services.Services.PaymentServices.Payment;
 using Services.Services.PaymentServices.Paymob;
+using Services.Services.RoutesServices;
 using Services.Services.SeatsService;
 using Services.Services.StationsServices;
 using Services.Services.TicketService;
@@ -48,7 +49,9 @@ namespace Services.ConfiqDepedancies
             services.AddTransient<IPaymentServices,PaymentServices>();
             services.AddHttpClient();
             services.AddTransient<ITicketServices, TicketServices>();
-            services.AddTransient<IStaitonServices,StaitonServices>();
+            services.AddTransient<IStaitonServices, StaitonServices>();
+            services.AddTransient<IRouteServices, RouteServices>();
+
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddTransient<IUrlHelper>(c =>

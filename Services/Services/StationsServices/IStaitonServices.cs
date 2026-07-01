@@ -19,6 +19,7 @@ namespace Services.Services.StationsServices
         bool SoftDeleteStation(Stations stations, int userid);
         Task<IEnumerable<Stations>> GetDeletedStation();
         bool Update(Stations stations);
-        
+        Task<bool> StationExsit(int id);
+
     }
 }
