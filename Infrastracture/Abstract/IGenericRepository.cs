@@ -1,5 +1,4 @@
-﻿using Infrastracture.Specifications;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -25,5 +24,8 @@ namespace Infrastracture.Abstract
         Task<T>FindIgnoreQueryFilter(Expression<Func<T, bool>> match);
         Task<IEnumerable<T>> GetAllAsyncIgnoreQueryFilter();
 
+        IQueryable<T> GetPridicated (Expression<Func<T, bool>> match, string[]include =null!);
+
+        Task<bool> IsAny(Expression<Func<T, bool>> match);
     }
 }
