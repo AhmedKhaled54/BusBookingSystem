@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Routing;
+﻿using Data.Entity;
 using MimeKit.Tnef;
 using System;
 using System.Collections.Generic;
@@ -10,8 +10,8 @@ namespace Services.Services.RoutesServices
 {
     public  interface IRouteServices
     {
-        Task CreateRoute(Route route);
-        Task<IEnumerable<Route>> GetAllRoutes();
-        Task<Route> GetRouteById (int id );
+        Task CreateRoute(Routes route);
+        Task<IEnumerable<Routes>> GetAllRoutes();
+        Task<Routes> GetRouteById (int id );
     }
 }

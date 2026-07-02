@@ -60,5 +60,8 @@ namespace Services.Services.StationsServices
 
         public async Task<bool> IsExsitValidation(string name, string city, int id)
             =>await _UOW.Repository<Stations>().IsAny(c=>c.Name==name&&c.City==city&&c.Id!=id);
+
+        public async Task<bool> StationExsit(int id)
+            =>await _UOW.Repository<Stations>().IsAny(c=>c.Id==id);
     }
 }

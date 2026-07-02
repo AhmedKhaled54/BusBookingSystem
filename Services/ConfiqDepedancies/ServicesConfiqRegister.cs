@@ -10,6 +10,13 @@ using Services.Services.DriverApplicationServices;
 using Services.Services.EmailServices;
 using Services.Services.FileServices;
 using Services.Services.OtpService;
+using Services.Services.PaymentServices.Payment;
+using Services.Services.PaymentServices.Paymob;
+using Services.Services.RoutesServices;
+using Services.Services.SeatsService;
+using Services.Services.StationsServices;
+using Services.Services.TicketService;
+using Services.Services.TripsServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +37,17 @@ namespace Services.ConfiqDepedancies
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IDriverApplicationService, DriverApplicationService>();
             services.AddTransient<INotificaionService, NotificationService>();
+            services.AddTransient<IBusServices, BusServices>();
+            services.AddSingleton<ICachUser, CachUser>();
+            services.AddTransient<ITripeServices, TripeServices>();
+            services.AddTransient<IBookingServices, BookingServices>();
+            services.AddTransient<ISeatServices, SeatServices>();
+            services.AddTransient<IPaymobServices, PaymobServices>();
+            services.AddTransient<IPaymentServices,PaymentServices>();
+            services.AddHttpClient();
+            services.AddTransient<ITicketServices, TicketServices>();
+            services.AddTransient<IStaitonServices, StaitonServices>();
+            services.AddTransient<IRouteServices, RouteServices>();
 
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
