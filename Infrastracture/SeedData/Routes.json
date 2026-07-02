@@ -1,0 +1,128 @@
+[
+  {
+    "Name": "Cairo - Alexandria Express",
+    "DisTance": 220,
+    "StartStationId": 1,
+    "EndStationId": 4
+  },
+  {
+    "Name": "Cairo - Giza Shuttle",
+    "DisTance": 25,
+    "StartStationId": 1,
+    "EndStationId": 2
+  },
+  {
+    "Name": "Cairo - 6th of October Line",
+    "DisTance": 40,
+    "StartStationId": 1,
+    "EndStationId": 3
+  },
+  {
+    "Name": "Cairo - Ismailia Route",
+    "DisTistance": 130,
+    "StartStationId": 1,
+    "EndStationId": 9
+  },
+  {
+    "Name": "Cairo - Suez Highway",
+    "DisTance": 150,
+    "StartStationId": 1,
+    "EndStationId": 10
+  },
+  {
+    "Name": "Cairo - Port Said Express",
+    "DisTance": 220,
+    "StartStationId": 1,
+    "EndStationId": 11
+  },
+  {
+    "Name": "Cairo - Mansoura Route",
+    "DisTance": 120,
+    "StartStationId": 1,
+    "EndStationId": 7
+  },
+  {
+    "Name": "Cairo - Tanta Line",
+    "DisTance": 90,
+    "StartStationId": 1,
+    "EndStationId": 6
+  },
+  {
+    "Name": "Mansoura - Alexandria Connector",
+    "DisTance": 160,
+    "StartStationId": 7,
+    "EndStationId": 4
+  },
+  {
+    "Name": "Tanta - Alexandria Route",
+    "DisTance": 85,
+    "StartStationId": 6,
+    "EndStationId": 4
+  },
+  {
+    "Name": "Zagazig - Cairo Line",
+    "DisTance": 80,
+    "StartStationId": 8,
+    "EndStationId": 1
+  },
+  {
+    "Name": "Ismailia - Suez Link",
+    "DisTance": 80,
+    "StartStationId": 9,
+    "EndStationId": 10
+  },
+  {
+    "Name": "Port Said - Damietta Route",
+    "DisTance": 95,
+    "StartStationId": 11,
+    "EndStationId": 12
+  },
+  {
+    "Name": "Damietta - Kafr El Sheikh Line",
+    "DisTance": 70,
+    "StartStationId": 12,
+    "EndStationId": 13
+  },
+  {
+    "Name": "Fayoum - Beni Suef Route",
+    "DisTance": 60,
+    "StartStationId": 14,
+    "EndStationId": 15
+  },
+  {
+    "Name": "Beni Suef - Minya Express",
+    "DisTance": 120,
+    "StartStationId": 15,
+    "EndStationId": 16
+  },
+  {
+    "Name": "Minya - Assiut Route",
+    "DisTance": 110,
+    "StartStationId": 16,
+    "EndStationId": 17
+  },
+  {
+    "Name": "Assiut - Sohag Line",
+    "DisTance": 100,
+    "StartStationId": 17,
+    "EndStationId": 18
+  },
+  {
+    "Name": "Sohag - Qena Route",
+    "DisTance": 95,
+    "StartStationId": 18,
+    "EndStationId": 19
+  },
+  {
+    "Name": "Qena - Luxor Express",
+    "DisTance": 60,
+    "StartStationId": 19,
+    "EndStationId": 20
+  },
+  {
+    "Name": "Luxor - Aswan Highway",
+    "DisTance": 220,
+    "StartStationId": 20,
+    "EndStationId": 21
+  }
+]

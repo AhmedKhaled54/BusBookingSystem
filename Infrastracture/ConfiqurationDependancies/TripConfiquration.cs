@@ -16,12 +16,12 @@ namespace Infrastracture.ConfiqurationDependancies
             b.HasKey(c => c.Id);
 
             b.HasOne(c => c.Bus)
-                .WithMany()
+                .WithMany(c=>c.Trips)
                 .HasForeignKey(c => c.BusId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             b.HasOne(c => c.Routes)
-               .WithMany()
+               .WithMany(c=>c.Trips)
                .HasForeignKey(c => c.RouteId)
                .OnDelete(DeleteBehavior.Restrict);
 

@@ -22,7 +22,7 @@ namespace Infrastracture.ConfiqurationDependancies
             
             
             b.HasOne(c=>c.Trip)
-                .WithMany()
+                .WithMany(c=>c.Bookings)
                 .HasForeignKey(c=>c.TripId) 
                 .OnDelete(DeleteBehavior.Restrict);
 

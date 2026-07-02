@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
@@ -15,12 +16,18 @@ namespace Services.Services.FileServices
         private readonly IWebHostEnvironment _webHost;
         private long MixSize = 109951163;
         private List<string>_allawExtension = new List<string>() { ".jpeg",".png",".jpg"};
+        private readonly IConfiguration _confiq;
 
-        public FileService(IWebHostEnvironment webHost)
+        public FileService
+            (
+            IWebHostEnvironment webHost,
+            IConfiguration confiq
+            )
         {
             _webHost = webHost;
+            _confiq = confiq;
         }
-      
+
 
         public async Task<string> Upload(IFormFile file, string folder)
         {
@@ -49,5 +56,8 @@ namespace Services.Services.FileServices
             File.Delete(fullpath);
             return true;
         }
+
+        public string GetUrl(string filepath)
+            => $"{_confiq["BaseUrl"]}{filepath}";
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Services.Services.Authantication;
-using Services.Services.CachingServices;
+using Services.Services.CachingServices.Redis;
 using Services.Services.EmailServices;
 using Services.Services.OtpService;
 using StackExchange.Redis;

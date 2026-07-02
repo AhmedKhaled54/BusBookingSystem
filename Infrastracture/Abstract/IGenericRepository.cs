@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastracture.Abstract
 {
-    public  interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
@@ -16,6 +16,14 @@ namespace Infrastracture.Abstract
         void Delete(T entity);
 
         Task<T> FindAsync(Expression<Func<T, bool>> match);
+        IQueryable<T> GetPridicated(Expression<Func<T, bool>> match, string[] include = null!);
+        Task<bool> IsAny(Expression<Func<T, bool>> match);
+
+        IQueryable<T> GetEntityWithSpecification(ISpecification<T> specs);
+        Task<T> GetEntityByIdSepecification(ISpecification<T> specification);
+        Task<T>FindIgnoreQueryFilter(Expression<Func<T, bool>> match);
+        Task<IEnumerable<T>> GetAllAsyncIgnoreQueryFilter();
+
         IQueryable<T> GetPridicated (Expression<Func<T, bool>> match, string[]include =null!);
 
         Task<bool> IsAny(Expression<Func<T, bool>> match);

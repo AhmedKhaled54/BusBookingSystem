@@ -17,7 +17,7 @@ namespace Infrastracture.ConfiqurationDependancies
             b.Property(c => c.PlateNumber).IsRequired().HasMaxLength(10);
             b.HasIndex(c => c.PlateNumber).IsUnique();
 
-            b.Property(c=>c.Model).IsRequired().HasMaxLength(10);
+            b.Property(c=>c.Model).IsRequired().HasMaxLength(50);
             
             
             b.HasOne(c=>c.Driver)

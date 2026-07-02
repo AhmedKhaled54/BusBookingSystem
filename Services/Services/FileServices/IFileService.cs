@@ -11,5 +11,6 @@ namespace Services.Services.FileServices
     {
         Task<string> Upload (IFormFile file,string folder);
         bool Remove(string filepath);
+        string GetUrl (string filepath);
     }
 }

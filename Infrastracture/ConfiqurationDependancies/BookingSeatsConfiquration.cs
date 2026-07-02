@@ -18,12 +18,12 @@ namespace Infrastracture.ConfiqurationDependancies
             b.Property(c => c.Price).HasPrecision(18, 2).IsRequired();
 
             b.HasOne(c => c.Seats)
-                .WithMany()
+                .WithMany(c=>c.BookingSeats)
                 .HasForeignKey(c => c.SeatsId)
                 .OnDelete(DeleteBehavior.NoAction);
             
             b.HasOne(c => c.Booking)
-                .WithMany()
+                .WithMany(c=>c.BookingSeats)
                 .HasForeignKey(c => c.BookingId)
                 .OnDelete(DeleteBehavior.NoAction);
 

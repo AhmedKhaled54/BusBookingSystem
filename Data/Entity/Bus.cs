@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data.Entity
 {
-    public class Bus
+    public class Bus:BaseEntity
     {
         public int Id { get; set; }
         public string Model { get; set; }
@@ -23,7 +23,6 @@ namespace Data.Entity
 
         public Driver Driver { get; set; }
         public User Owner { get; set; }
-
         public ICollection<Seats> Seats { get; set; } = new List<Seats>();
         public ICollection<Trip> Trips { get; set; } = new List<Trip>();
     }

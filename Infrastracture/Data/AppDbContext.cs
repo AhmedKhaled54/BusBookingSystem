@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime.Intrinsics;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,7 @@ namespace Infrastracture.Data
         {
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            ApplySoftDeleteFilter(builder);
 
             base.OnModelCreating(builder);
         }
@@ -48,7 +50,34 @@ namespace Infrastracture.Data
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<Notification> Notifications { get; set; } 
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<PaymobIntetion> PaymobIntentions { get; set; }
 
-}
+
+
+        private void ApplySoftDeleteFilter(ModelBuilder modelBuilder)
+        {
+            var baseType = typeof(BaseEntity);
+
+            var entities = modelBuilder.Model
+                .GetEntityTypes()
+                .Where(t => baseType.IsAssignableFrom(t.ClrType));
+
+            foreach (var entity in entities)
+            {
+                var method = typeof(AppDbContext)
+                    .GetMethod(nameof(SetSoftDeleteFilter),
+                        System.Reflection.BindingFlags.NonPublic |
+                        System.Reflection.BindingFlags.Static)
+                    ?.MakeGenericMethod(entity.ClrType);
+
+                method?.Invoke(null, new object[] { modelBuilder });
+            }
+        }
+        private static void SetSoftDeleteFilter<TEntity>(ModelBuilder modelBuilder) where TEntity : BaseEntity
+        {
+            modelBuilder.Entity<TEntity>()
+                .HasQueryFilter(x => !x.IsDeleted);
+        }
+    }
 }

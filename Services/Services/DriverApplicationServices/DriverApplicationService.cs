@@ -74,7 +74,7 @@ namespace Services.Services.DriverApplicationServices
             if (app == null)
                 throw new Exception("App Not Found !");
             if (app.Status != ApplicationDriverStatus.pending)
-                throw new Exception("Only Pending Application Can Be Approved");
+                throw new Exception("Only Pending Application Can Be Rejected");
             app.Status = ApplicationDriverStatus.Rejected;
             app.ReviewAt = DateTime.Now;
             app.AdminComment = CommentAdmin;

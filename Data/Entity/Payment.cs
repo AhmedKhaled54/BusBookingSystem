@@ -14,9 +14,10 @@ namespace Data.Entity
         public decimal Amount { get; set; }
         public string Currency { get; set; } = "EGP";
         public PaymentStatus Status { get; set; } = PaymentStatus.Pending;
-        public DateTime PayedAt { get; set; } = DateTime.UtcNow;
-        public string PaymentMethos { get; set; }
-        public string TransactionId { get; set; }
+        public DateTime CreatedAt {  get; set; }=DateTime.Now;
+        public DateTime?PayedAt { get; set; }
+        public PaymentsMethod PaymentMethod { get; set; } 
+        public string? TransactionId { get; set; }
         public Booking Booking { get; set; }
     }
 }
