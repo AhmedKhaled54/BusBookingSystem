@@ -13,7 +13,10 @@ using System.Threading.Tasks;
 namespace Core.Feature.Route.Command.Handler
 {
     public class AddRouteCommandHandler : ResponseHandler,
-        IRequestHandler<CreateRouteCommand, Response<string>>
+        IRequestHandler<CreateRouteCommand, Response<string>>,
+        IRequestHandler<UpdateRouteCommand, Response<string>>,
+        IRequestHandler<SoftDelteRouteCommand, Response<string>>,
+        IRequestHandler<RestoreRouteCommand, Response<string>>
     {
 
         #region Feild 
@@ -33,6 +36,39 @@ namespace Core.Feature.Route.Command.Handler
             var route = _mapper.Map<Routes>(request);
             await _services.CreateRoute(route);
             return Success("Create Route Succssfuly ");
+        }
+
+        public async Task<Response<string>> Handle(UpdateRouteCommand request, CancellationToken cancellationToken)
+        {
+            var route =await _services.GetRouteById(request.Id);
+            if (route == null)
+                return NotFound<string>("Route Not Found");
+            var reult = _mapper.Map(request, route);
+             _services.UpdateRoute(reult);
+            return Success("Update Route Succssfuly ");
+        }
+
+        public async Task<Response<string>> Handle(SoftDelteRouteCommand request, CancellationToken cancellationToken)
+        {
+            var route =await  _services.GetRouteById(request.Id);
+            if (route == null)
+                return NotFound <string>("Route Not Found");
+            
+            _services.SoftDeleteRoute(route, request.UserId);
+            return Success("Delete Route Succssfuly ");
+
+        }
+
+        public async Task<Response<string>> Handle(RestoreRouteCommand request, CancellationToken cancellationToken)
+        {
+            var route =await _services.GetDeletedRouteById(request.Id);
+            if (route == null)
+                return NotFound<string>("Route Not Found");
+            route.IsDeleted= false;
+            route.DeletedBy = null;
+            route.DeletedAt = null;
+           
+            return Success("Restore Route Succssfuly ");
         }
     }
 }

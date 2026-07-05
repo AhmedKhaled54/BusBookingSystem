@@ -38,5 +38,33 @@ namespace Services.Services.RoutesServices
             var data = await _UOW.Repository<Routes>().GetEntityByIdSepecification(specs);
             return data;
         }
+
+
+
+        public bool UpdateRoute(Routes route)
+        {
+            _UOW.Repository<Routes>().Update(route);
+            return true;
+        }
+        public bool SoftDeleteRoute(Routes route, int userid)
+        {
+            route.IsDeleted = true;
+            route.DeletedBy = userid;
+            route.DeletedAt = DateTime.Now;
+            return true;
+
+        }
+
+        public Task<Routes> GetDeletedRouteById(int id)
+            => _UOW.Repository<Routes>().FindIgnoreQueryFilter(c => c.IsDeleted && c.Id == id);
+
+        public async Task<IEnumerable<Routes>> GetDeletedRoutes()
+        {
+            var specs = new RoutesSpecification();
+            var result = new RoutesWithStationSpecification(specs);
+            var data = await _UOW.Repository<Routes>().GetEntityWithSpecification(result)
+                .IgnoreQueryFilters().Where(c=>c.IsDeleted).ToListAsync();
+            return data;
+        }
     }
 }
