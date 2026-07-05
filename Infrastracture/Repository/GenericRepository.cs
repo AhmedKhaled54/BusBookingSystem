@@ -1,5 +1,6 @@
 ﻿using Infrastracture.Abstract;
 using Infrastracture.Data;
+using Infrastracture.Specifications;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,5 +49,23 @@ namespace Infrastracture.Repository
 
         public void Update(T entity)
             => _context.Set<T>().Update(entity);
+
+        public IQueryable<T> GetEntityWithSpecification(ISpecification<T> specs)
+            => ApplyQuery(specs);
+
+        private IQueryable<T> ApplyQuery(ISpecification<T> sepcs)
+            => EvaluationSpecification<T>.GetQuery(_context.Set<T>().AsQueryable(), sepcs);
+
+        public async Task<T> GetEntityByIdSepecification(ISpecification<T> specification)
+            => await ApplyQuery(specification).FirstOrDefaultAsync();
+
+        public async Task<T> FindIgnoreQueryFilter(Expression<Func<T, bool>> match)
+            => await _context.Set<T>().IgnoreQueryFilters().FirstOrDefaultAsync(match);
+
+        public async Task<IEnumerable<T>> GetAllAsyncIgnoreQueryFilter()
+            => await _context.Set<T>().IgnoreQueryFilters().ToListAsync();
+
+       
+
     }
 }
